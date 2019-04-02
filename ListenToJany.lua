@@ -106,12 +106,12 @@ ST_Options:SetScript("OnShow", function(self)
 			if _G["ST_Buff_"..key]:GetChecked() then
 				if ST_InterruptList[(key)] ~= true then
 					ST_InterruptList[(key)] = true
-					DEFAULT_CHAT_FRAME:AddMessage("自动喊话: "..GetSpellLink(key)..ST_ON)
+					DEFAULT_CHAT_FRAME:AddMessage("设置: "..GetSpellLink(key)..ST_ON)
 				end
 			else
 				if ST_InterruptList[(key)] ~= false then
 					ST_InterruptList[(key)] = false
-					DEFAULT_CHAT_FRAME:AddMessage("自动喊话: "..GetSpellLink(key)..ST_OFF)
+					DEFAULT_CHAT_FRAME:AddMessage("设置: "..GetSpellLink(key)..ST_OFF)
 				end
 			end
 		end
@@ -194,15 +194,15 @@ ListenToJany:SetScript("OnEvent",function(self,event)
 
 		if SpellID == keys and values == true then
 			if EventType == "SPELL_CAST_FAILED" then--打断失败
-				print(EventType, SourceName, destName, spellname, ExtraskillID) 
+				--print(EventType, SourceName, destName, spellname, ExtraskillID) 
 				SendChatMessage("【失败】 " .. SourceName .. spelllink .. destName, "SAY", nil, SourceName)
 			end
 			if EventType == "SPELL_CAST_SUCCESS" then--技能
-				print(EventType, SourceName, destName, spellname, ExtraskillID) 
+				--print(EventType, SourceName, destName, spellname, ExtraskillID) 
 				SendChatMessage("【施放】 " .. SourceName .. spelllink .. destName, "SAY", nil, SourceName)
 			end
 			if EventType == "SPELL_INTERRUPT" then--打断成功
-				print(EventType, SourceName, destName, spellname, ExtraskillID) 
+				--print(EventType, SourceName, destName, spellname, ExtraskillID) 
 				SendChatMessage("【成功】 " .. SourceName .. spelllink .. destName .. Extraskilllink, "SAY", nil, SourceName)
 			end
 		end
