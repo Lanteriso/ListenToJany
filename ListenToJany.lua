@@ -97,6 +97,7 @@ ST_Options:SetScript("OnShow", function(self)
 		local button = CreateFrame("CheckButton", "ST_Buff_"..key, ST_Options, "InterfaceOptionsCheckButtonTemplate")
 		button:SetPoint("TOPLEFT", 32+150*countx, -32-32*count)
 		getglobal(button:GetName().."Text"):SetText(GetSpellInfo(key))
+		print(getglobal(button:GetName().."Text"))
 		if value == true then button:SetChecked(true) else button:SetChecked(false) end
 	end	
 	
@@ -172,7 +173,7 @@ ListenToJany:SetScript("OnEvent",function(self,event)
 	local spellname=GetSpellInfo(SpellID)--获取技能名字
 	local spelllink=GetSpellLink(SpellID)--获取技能名字详细
 	local Extraskilllink=GetSpellLink(ExtraskillID)--被打断的技能
-	print(EventType, SourceName, spelllink, destName, Extraskilllink) 
+	--print(EventType, SourceName, spelllink, destName, Extraskilllink) 
 	--[[if EventType == "SPELL_CAST_SUCCESS" then--技能
 		DEFAULT_CHAT_FRAME:AddMessage(SourceName .. spelllink .. destName,1,0,1) 
 		print(EventType, SourceName, destName, spellname, ExtraskillID) 
