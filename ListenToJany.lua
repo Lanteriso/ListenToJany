@@ -1,6 +1,6 @@
 
 local ListenToJany = CreateFrame("Frame")
-
+print("载入成功ListenToJany")
 -- 首次登陆加载
 local ListenToJany_Load = CreateFrame("Frame")
 ListenToJany_Load:RegisterEvent("ADDON_LOADED")
@@ -58,7 +58,7 @@ ListenToJany_Load:SetScript("OnEvent", function(_, event, addon)
 		if ST_InterruptList[57994] == nil then ST_InterruptList[57994] = true end   --sm 风剪
 		if ST_InterruptList[2139] == nil then ST_InterruptList[2139] = true end   --fs 法术反制
 		if ST_InterruptList[15487] == nil then ST_InterruptList[15487] = true end   --ms 沉默
-		print("加载数据成功ListenToJany")
+
 
 
 	end
@@ -122,7 +122,7 @@ end)
 
 InterfaceOptions_AddCategory(ST_Options)
 
--- locales	
+-- 国际化
 if GetLocale() == "ruRU" then
 	ST_THANKS = "Спасибо за "
 	ST_LOADED = "загружен"
@@ -172,6 +172,7 @@ ListenToJany:SetScript("OnEvent",function(self,event)
 	local spellname=GetSpellInfo(SpellID)--获取技能名字
 	local spelllink=GetSpellLink(SpellID)--获取技能名字详细
 	local Extraskilllink=GetSpellLink(ExtraskillID)--被打断的技能
+	print(EventType, SourceName, spelllink, destName, Extraskilllink) 
 	--[[if EventType == "SPELL_CAST_SUCCESS" then--技能
 		DEFAULT_CHAT_FRAME:AddMessage(SourceName .. spelllink .. destName,1,0,1) 
 		print(EventType, SourceName, destName, spellname, ExtraskillID) 
@@ -190,6 +191,13 @@ ListenToJany:SetScript("OnEvent",function(self,event)
 		SendChatMessage(SourceName .. spelllink .. " 成功打断 " .. destName ..Extraskilllink)
 
 	end]]
+	if EventType == "SPELL_DISPEL" then--驱散
+		SendChatMessage("【成功驱散】 " .. SourceName .. spelllink .. destName .. Extraskilllink, "SAY", nil, SourceName)
+	end
+	if SpellID == 30449 then--法师偷
+		SendChatMessage("【法术吸取】 " .. SourceName .. spelllink .. destName .. Extraskilllink .. EventType, "SAY", nil, SourceName)
+	end
+
 	for keys,values in pairs(ST_InterruptList) do
 
 		if SpellID == keys and values == true then
@@ -224,11 +232,12 @@ ListenToJany:SetScript("OnEvent",function(self,event)
 end)
 
 ListenToJany:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-DEFAULT_CHAT_FRAME:AddMessage("ListenToJany "..ST_LOADED)
+--DEFAULT_CHAT_FRAME:AddMessage("ListenToJany "..ST_LOADED)
 
 
 
 --[[
+
 INTERRUPT = 打断，各职业一般打断技能；
 HARDCC = 群体硬控，DH混乱新星、WS扫堂腿、SS暗怒等；
 SOFTCC = 群体软控，DKT群抓、咕咕台风、牧师群恐等；
@@ -240,3 +249,5 @@ PERSONAL = 个人减伤技能，DKT的吸血鬼、防战的盾墙、DH疾影等�
 IMMUNITY = 免疫机能，法师冰箱、骑士武器、盗贼斗篷等；
 DAMAGE = 伤害大技能，DH变身、火法燃烧、战士大风车等；
 ]]
+
+

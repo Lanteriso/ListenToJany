@@ -1,8 +1,8 @@
 ## Interface: 80000 
 ## Title: ListenToJany
-## Notes: ListenToJany. 
-## Notes-zhCN: ListenToJany. 
-## Author: CK 
+## Notes: 打断喊话宏
+## Notes-zhCN: 打断喊话宏 
+## Author: JANY
 ## DefaultState: Enabled 
 ## Version: 1.0.0 
 
